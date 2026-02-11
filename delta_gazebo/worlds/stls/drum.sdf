@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<sdf version="1.11">
+  <model name="drum">
+    <static>false</static>
+
+    <link name="link">
+        <collision name="collision">
+      <geometry>
+        <cylinder>
+          <radius>0.3</radius>
+          <length>1.4</length>
+        </cylinder>
+      </geometry>
+    </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>home/jhoan/gz_models/my_first_world/meshes/drum_oil.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>1 0 0 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+        </material>
+      </visual>
+
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.1</ixx>
+          <iyy>0.1</iyy>
+          <izz>0.1</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      
+
+    </link>
+
+  </model>
+</sdf>

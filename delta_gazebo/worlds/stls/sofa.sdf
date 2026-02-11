@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<sdf version="1.11">
+  <model name="sofa">
+    <static>false</static>
+    
+    <link name="link">
+      <pose>0 0 0 0 0 0</pose>    
+      <collision name="collision">
+      
+        <geometry>
+          <box>
+            <size>1.6 0.8 0.6</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+        
+          <mesh>
+            <uri>/home/jhoan/gz_models/my_first_world/meshes/sofa.stl</uri>
+            <scale>0.04 0.04 0.04</scale>
+          </mesh>
+        </geometry>
+        <material>
+        # color purple
+          <ambient>0.5 0.2 0.8 1</ambient>
+          <diffuse>0.5 0.2 0.8 1</diffuse>
+        </material>
+      </visual>
+
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>10</ixx>
+          <iyy>10</iyy>
+          <izz>10</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+    </link>
+
+  </model>
+</sdf>

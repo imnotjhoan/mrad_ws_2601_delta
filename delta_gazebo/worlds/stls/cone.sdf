@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<sdf version="1.11">
+  <model name="cone">
+    <static>false</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>home/jhoan/gz_models/my_first_world/meshes/cone.stl</uri>
+            <scale>0.2 0.2 0.2</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <!-- color: naranja -->
+          <ambient>1 0.3 0 1</ambient>
+          <diffuse>1 0.3 0 1</diffuse>
+        </material>
+      </visual>
+
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.1</ixx><iyy>0.1</iyy><izz>0.1</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
+      </inertial>
+        <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>home/jhoan/gz_models/my_first_world/meshes/cone.stl</uri>
+            <scale>0.2 0.2 0.2</scale>
+          </mesh>
+        </geometry>
+      </collision>   
+    </link>
+
+  </model>
+</sdf>
