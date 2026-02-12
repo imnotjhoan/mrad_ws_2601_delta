@@ -16,8 +16,8 @@ class ControlNode(Node):
         self.declare_parameter('max_steering', 1.0)          # Max steering angle saturation (radians)
         self.declare_parameter('min_steering', -1.0)         # Min steering angle saturation (radians)
         self.declare_parameter('forward_velocity', 1.0)      # Constant forward velocity (m/s)
-        self.brake_turn_angle = math.radians(8.0)
-
+        
+        self.declare_parameter=('brake_turn_angle', 8.0)
 
 
         # Get parameters
@@ -26,7 +26,7 @@ class ControlNode(Node):
         self.forward_vel = self.get_parameter('forward_velocity').value
         self.max_steering = float(self.get_parameter('max_steering').value)
         self.min_steering = float(self.get_parameter('min_steering').value)
-        
+        self.brake_turn_angle= float(self.get_parameter('brake_turn_angle').value)
         # State variables for derivative calculation
         self.prev_error = 0.0
         self.prev_time = None
