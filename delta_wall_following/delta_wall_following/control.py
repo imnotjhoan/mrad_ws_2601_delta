@@ -11,13 +11,12 @@ class ControlNode(Node):
         super().__init__('control_node')
 
         # -- PARAMETERS --
-        self.declare_parameter('kp', 2.0)                    # Proportional gain for PD controller
-        self.declare_parameter('kd', 0.5)                    # Derivative gain for PD controller
+        self.declare_parameter('kp', 0.5)                    # Proportional gain for PD controller
+        self.declare_parameter('kd', 0.9)                    # Derivative gain for PD controller
         self.declare_parameter('max_steering', 1.0)          # Max steering angle saturation (radians)
         self.declare_parameter('min_steering', -1.0)         # Min steering angle saturation (radians)
-        self.declare_parameter('forward_velocity', 1.0)      # Constant forward velocity (m/s)
-        
-        self.declare_parameter=('brake_turn_angle', 8.0)
+        self.declare_parameter('forward_velocity', 2.0)      # Constant forward velocity (m/s)
+        self.declare_parameter('brake_turn_angle', 1.0)
 
 
         # Get parameters

@@ -23,9 +23,9 @@ class dist_finder(Node):
         super().__init__('dist_finder')
 
         # -- PARAMETERS --
-        self.declare_parameter('wall_distance', 1.5) # Desired distance to the wall in meters
-        self.declare_parameter('body_velocity', 1.0)   # Forward velocity of the robot in m/s
-        self.declare_parameter('angle_th', 45.0)        # Angle between the two laser rays in degrees
+        self.declare_parameter('wall_distance', 0.5) # Desired distance to the wall in meters
+        self.declare_parameter('body_velocity', 2.0)   # Forward velocity of the robot in m/s
+        self.declare_parameter('angle_th', 30.0)        # Angle between the two laser rays in degrees
 
         self.body_vel = float(self.get_parameter('body_velocity').value)
         self.desired_r = float(self.get_parameter('wall_distance').value)
