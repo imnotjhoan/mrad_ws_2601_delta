@@ -13,9 +13,9 @@ class ControlNode(Node):
         # -- PARAMETERS --
         self.declare_parameter('kp', 0.5)                    # Proportional gain for PD controller
         self.declare_parameter('kd', 0.9)                    # Derivative gain for PD controller
-        self.declare_parameter('max_steering', 1.0)          # Max steering angle saturation (radians)
-        self.declare_parameter('min_steering', -1.0)         # Min steering angle saturation (radians)
-        self.declare_parameter('forward_velocity', 2.0)      # Constant forward velocity (m/s)
+        self.declare_parameter('max_steering', 4.0)          # Max steering angle saturation (radians)
+        self.declare_parameter('min_steering', -4.0)         # Min steering angle saturation (radians)
+        self.declare_parameter('forward_velocity', 1.0)      # Constant forward velocity (m/s)
         self.declare_parameter('brake_turn_angle', 1.0)
 
 
@@ -100,8 +100,8 @@ class ControlNode(Node):
 
         # Calculate steering angle: steering = theta - theta_desired
         # (theta is the measured angular error alpha)
-        steering_angle = theta - theta_desired
-
+        # steering_angle = theta - theta_desired
+        steering_angle = -theta_desired
         # Apply saturation (min and max limits)
         steering_angle = max(
             self.min_steering,
@@ -118,8 +118,9 @@ class ControlNode(Node):
             cmd.twist.linear.x = self.forward_vel
             cmd.twist.angular.z = self.brake_turn_angle  # Turn in place to the left when braking
         else:
-            cmd.twist.linear.x = self.forward_vel
-            cmd.twist.angular.z = -theta_desired
+            # cmd.twist.linear.x = self.forward_vel
+            cmd.twist.linear.x = self.forward_vel * math.exp(-self.kp * abs(error))
+            cmd.twist.angular.z = steering_angle
         
 
         self.cmd_pub.publish(cmd)
