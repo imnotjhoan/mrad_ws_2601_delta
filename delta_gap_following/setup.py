@@ -25,7 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'control_gap_node=delta_gap_following.control_gap_node:main',
-            
+            'gap_distance_node=delta_gap_following.gap_distance_node:main',
         ],
     },
 )
