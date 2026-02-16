@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'delta_nav'
+package_name = 'delta_gap_following'
 
 setup(
     name=package_name,
@@ -24,8 +24,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-        'ttc_break_node = delta_nav.ttc_break_node:main',
-        'ttc_gap_logger_node = delta_nav.ttc_gap_logger_node:main',
+            'control_gap_node=delta_gap_following.control_gap_node:main',
+            
         ],
     },
 )

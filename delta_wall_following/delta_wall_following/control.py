@@ -17,9 +17,10 @@ class ControlNode(Node):
         self.declare_parameter('min_steering', -4.0)         # Min steering angle saturation (radians)
         self.declare_parameter('forward_velocity', 1.0)      # Constant forward velocity (m/s)
         self.declare_parameter('brake_turn_angle', 1.0)
-
+        self.declare_parameter('kp_vel',0.1)
 
         # Get parameters
+        self.kp_vel = self.get_parameter('kp_vel').value
         self.kp = self.get_parameter('kp').value
         self.kd = self.get_parameter('kd').value
         self.forward_vel = self.get_parameter('forward_velocity').value
@@ -119,7 +120,9 @@ class ControlNode(Node):
             cmd.twist.angular.z = self.brake_turn_angle  # Turn in place to the left when braking
         else:
             # cmd.twist.linear.x = self.forward_vel
-            cmd.twist.linear.x = self.forward_vel * math.exp(-self.kp * abs(error))
+            min_v = 0.5 
+            calculated_v = self.forward_vel * math.exp(-self.kp_vel * abs(error))
+            cmd.twist.linear.x = max(min_v, calculated_v)
             cmd.twist.angular.z = steering_angle
         
 

@@ -4,14 +4,14 @@ twist_mux:
     # Example input topics (adjust as needed)
     topics:
       navigation:
-        topic   : cmd_vel_nav
+        topic   : cmd_vel_nav #Controlador (FOLLOW THE WALL)
         timeout : 0.5
         priority: 10
       joystick  : 
-        topic   : cmd_vel_joy
+        topic   : cmd_vel_joy #Control de PS4
         timeout : 0.5
         priority: 20
       keyboard  : 
-        topic   : cmd_vel_key
+        topic   : cmd_vel_key #FRENO DE EMERGENCIA
         timeout : 0.1
         priority: 255
