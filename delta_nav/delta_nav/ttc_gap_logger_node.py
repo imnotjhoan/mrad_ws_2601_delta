@@ -4,8 +4,7 @@ from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray
 from sensor_msgs.msg import LaserScan
 from visualization_msgs.msg import Marker
-from geometry_msgs.msg import Twist
-
+from geometry_msgs.msg import Twist 
 
 
 class TTCGapLoggerNode(Node):
@@ -18,7 +17,12 @@ class TTCGapLoggerNode(Node):
         self.create_subscription(Float32MultiArray, '/ttc_values', self._ttc_callback, 10)
 
         self.marker_pub = self.create_publisher(Marker, '/gap_marker', 10)
-        self.angle_gap = self.create_publisher(Twist, '/gap_angle', 10)
+
+        self.ang_err_pub = self.create_publisher(
+            Twist,
+            '/cmd_ang_tcc',
+            10
+        )
 
         self.get_logger().info("Nodo TTC Gap Logger iniciado.")
 
@@ -122,20 +126,18 @@ class TTCGapLoggerNode(Node):
         while angle_rad < -math.pi:
             angle_rad += 2 * math.pi
 
-        self.publish_gap_angle(angle_rad)
+        angle_deg = math.degrees(angle_rad)
+
         # Publish marker
         self._publish_gap_marker(angle_rad)
-
+        cmd_ang=Twist()
+        cmd_ang.angular.z=angle_deg
+        self.ang_err_pub.publish(cmd_ang)
         # Log only what you asked (size + center angle + motion)
         self.get_logger().info(
-            f"Gap más grande: tamaño={largest_len} | centro={angle_rad:.2f}° | movimiento={motion}"
+            f"Gap más grande: tamaño={largest_len} | centro={angle_deg:.2f}° | movimiento={motion}"
         )
 
-    def publish_gap_angle(self,angle_rad):
-        angle_deg = math.degrees(angle_rad)
-        msg_envio = Twist()
-        msg_envio.angular.z = angle_deg
-        self.angle_gap.publish(msg_envio)
     def _publish_gap_marker(self, angle_rad):
         marker = Marker()
         marker.header.frame_id = self.last_scan.header.frame_id

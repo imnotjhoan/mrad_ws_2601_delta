@@ -33,7 +33,7 @@ class GapFollowControl(Node):
         # Subscription to gap_angle topic
         self.gap_sub = self.create_subscription(
             Twist,
-            '/gap_angle',
+            '/cmd_ang_tcc',
             self.gap_callback,
             10
         )
