@@ -1,4 +1,6 @@
 from setuptools import find_packages, setup
+import os
+from glob import glob
 
 package_name = 'delta_wall_following'
 
@@ -10,6 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name,'launch'), glob('launch/*.*'))
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,7 +27,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'delta_wall_following_node = delta_wall_following.dist_finder:main',
+            'dist_finder = delta_wall_following.dist_finder:main',
             'control_node = delta_wall_following.control:main',
         ],
     },

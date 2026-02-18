@@ -3,15 +3,27 @@ twist_mux:
     use_stamped: true # Set to true if using geometry_msgs/TwistStamped messages
     # Example input topics (adjust as needed)
     topics:
-      navigation:
-        topic   : cmd_vel_nav #Controlador (FOLLOW THE WALL)
-        timeout : 0.5
-        priority: 10
+      ttc_brake:
+        topic   : cmd_ttc
+        timeout : 0.3 
+        priority: 200        # Highest priority - safety always overrides 
       joystick  : 
-        topic   : cmd_vel_joy #Control de PS4
+        topic   : cmd_vel_joy
+        timeout : 0.5
+        priority: 255
+      keyboard  : 
+        topic   : cmd_vel_key
         timeout : 0.5
         priority: 20
-      keyboard  : 
-        topic   : cmd_vel_key #FRENO DE EMERGENCIA
-        timeout : 0.1
-        priority: 255
+      navigation:
+        topic   : cmd_vel_nav
+        timeout : 0.5
+        priority: 10
+      wall_following:
+        topic   : cmd_vel_ctrl
+        timeout : 0.5
+        priority: 5
+      follow__the_gap:
+        topic   : cmd_vel_ttc_gap
+        timeout : 0.5
+        priority: 5

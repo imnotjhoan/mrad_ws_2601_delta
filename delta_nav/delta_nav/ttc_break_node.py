@@ -20,7 +20,7 @@ class TTCBreakNode(Node):
         self.declare_parameter('forward_angle_range', 10.0)     # degrees - angle range in front of robot to consider
         self.declare_parameter('rear_angle_range', 10.0)        # degrees - angle range at rear of robot to consider
         self.declare_parameter('min_range', 0.1)                # meters - ignore measurements closer than this
-        self.declare_parameter('max_range', 10.0)               # meters - ignore measurements farther than this
+        self.declare_parameter('max_range', 6.0)               # meters - ignore measurements farther than this
         
         self.publish_rate = float(self.get_parameter('publish_rate').value)
         self.ttc_threshold = float(self.get_parameter('ttc_threshold').value)
@@ -53,7 +53,7 @@ class TTCBreakNode(Node):
         self.create_subscription(TwistStamped, '/diffdrive_controller/cmd_vel', self._cmd_vel_callback, qos)
         
         # Publisher for safety-override velocity commands
-        self.cmd_ttc_publisher = self.create_publisher(TwistStamped, '/cmd_vel_key', qos)
+        self.cmd_ttc_publisher = self.create_publisher(TwistStamped, '/cmd_ttc', qos)
          # Publisher for safety-override velocity commands
         self.brake_pub = self.create_publisher(Bool, '/brake_active', 10)
 
@@ -175,10 +175,22 @@ class TTCBreakNode(Node):
         
         # Get the current forward velocity command
         cmd_linear_x = self.current_cmd_vel.twist.linear.x
-
         
-        # If robot is not commanded to move, no need to brake
+        # If robot is not moving, compute all TTC as inf and publish
         if cmd_linear_x == 0.0:
+            # Create array of inf values for all laser rays
+            directional_ttc_array = [float('inf')] * len(scan_msg.ranges)
+            # Add direction flag (0.0 for forward by default)
+            directional_ttc_array.append(0.0)
+            
+            ttc_msg = Float32MultiArray()
+            ttc_msg.data = directional_ttc_array
+            self.ttc_array_pub.publish(ttc_msg)
+            
+            # No brake needed when stopped
+            brake_msg = Bool()
+            brake_msg.data = True
+            self.brake_pub.publish(brake_msg)
             return
         
         # Process laser scan measurements
@@ -220,11 +232,11 @@ class TTCBreakNode(Node):
             
             if in_relevant_zone:
                 ttc = self._calculate_ttc_for_measurement(range_val, angle, cmd_linear_x)
-
+                
                 # Track minimum TTC
                 if ttc < self.min_ttc:
                     self.min_ttc = ttc
-
+                
                 # Track minimum distance
                 if range_val < self.min_distance:
                     self.min_distance = range_val
@@ -237,11 +249,11 @@ class TTCBreakNode(Node):
             scan_msg, cmd_linear_x
         )
          # Agregar valor extra según dirección de movimiento
-        if cmd_linear_x > 0.0:
+        if cmd_linear_x >= 0.0:
             directional_ttc_array.append(0.0)
         elif cmd_linear_x < 0.0:
             directional_ttc_array.append(1.0)
-        # Si cmd_linear_x == 0, no se agrega nada
+        # Si cmd_linear_x == 0, empieza hacia adelante
         ttc_msg = Float32MultiArray()
         ttc_msg.data = directional_ttc_array
         self.ttc_array_pub.publish(ttc_msg)

@@ -131,11 +131,12 @@ class TTCGapLoggerNode(Node):
         # Publish marker
         self._publish_gap_marker(angle_rad)
         cmd_ang=Twist()
-        cmd_ang.angular.z=angle_deg
+        cmd_ang.angular.z=angle_rad
         self.ang_err_pub.publish(cmd_ang)
         # Log only what you asked (size + center angle + motion)
         self.get_logger().info(
-            f"Gap más grande: tamaño={largest_len} | centro={angle_deg:.2f}° | movimiento={motion}"
+            #f"Gap más grande: tamaño={largest_len} | centro={angle_deg:.2f}° | movimiento={motion}"
+            f"flag: {direction_flag} "
         )
 
     def _publish_gap_marker(self, angle_rad):

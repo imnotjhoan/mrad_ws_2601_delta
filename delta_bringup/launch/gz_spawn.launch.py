@@ -49,11 +49,15 @@ def generate_launch_description():
         arguments=[
             "-name", "diffbot",
             "-topic", "robot_description",
-            "-x", "-8.0", "-y", "-2.0", "-z", "1",
-            
+            "-x", "-18.0",
+            "-y", "4.0",
+            "-z", "1.0",
+            "-R", "0.0",      # roll
+            "-P", "0.0",      # pitch
+            "-Y", "1.5708",   # yaw (90°)
         ],
     )
-   
+
     bridge_params = os.path.join(get_package_share_directory(gazebo_pkg_name),'config','topic_bridge.yaml')
 
 
@@ -102,16 +106,7 @@ def generate_launch_description():
                     remappings=[('/cmd_vel_out','/diffdrive_controller/cmd_vel')]
     )
     
-    tcc_node = Node(
-        package="aeb_tcc",
-        executable="tcc_node",
-        name="tcc_node",
-        output="screen",
-        parameters=[
-            {"use_sim_time": True},
-            {"theta_roi_deg": 30.0}
-        ]
-    )
+    
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -121,7 +116,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             "world",
-            default_value=os.path.join(get_package_share_directory(gazebo_pkg_name), "worlds", "demo_track.sdf"),
+            default_value=os.path.join(get_package_share_directory(gazebo_pkg_name), "worlds", "RaceTrack.sdf"),
             description="Full path to world SDF file",
         ),
         gz_launch,
@@ -133,5 +128,5 @@ def generate_launch_description():
         joy_node,
         teleop_node,
         twist_mux_node,
-        tcc_node,
+        
     ])

@@ -25,7 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
         'ttc_break_node = delta_nav.ttc_break_node:main',
-        'ttc_gap_logger_node = delta_nav.ttc_gap_logger_node:main',
+        'start_controller_node = delta_nav.start_controller_node:main',
         ],
     },
 )

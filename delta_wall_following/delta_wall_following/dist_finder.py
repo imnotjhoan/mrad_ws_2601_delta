@@ -4,6 +4,8 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist, TwistStamped
 import math
 import numpy as np
+from std_msgs.msg import Bool
+
 
 def getRange(ranges, th, angle_min, angle_increment):
     # ángulo a 90 grados del auto por la derecha
@@ -26,6 +28,8 @@ class dist_finder(Node):
         self.declare_parameter('max_valid_distance', 15.0)
         self.declare_parameter('max_discontinuity', 2.0)
         self.declare_parameter('search_error_rate', 0.6)  # Tasa de aumento del error al buscar
+        self.declare_parameter('front_wall_distance', 1.5)
+
         
         self.body_vel = float(self.get_parameter('body_velocity').value)
         self.desired_r = float(self.get_parameter('wall_distance').value)
@@ -33,7 +37,7 @@ class dist_finder(Node):
         self.max_valid_distance = float(self.get_parameter('max_valid_distance').value)
         self.max_discontinuity = float(self.get_parameter('max_discontinuity').value)
         self.search_error_rate = float(self.get_parameter('search_error_rate').value)
-        
+        self.front_wall_distance= float(self.get_parameter('search_error_rate').value)
         self.current_cmd_vel = TwistStamped()
         
         # Estado de búsqueda del muro
@@ -56,9 +60,15 @@ class dist_finder(Node):
         )
         self.cmd_pub = self.create_publisher(
             Twist,
-            '/error',
+            '/error_wall',
             10
         )
+        self.brake_pub = self.create_publisher(
+        Bool,
+        '/brake_active',
+        10
+        )
+
         self.get_logger().info('Nodo de seguimiento de muro iniciado')
         self.past_time = None
     
@@ -92,6 +102,15 @@ class dist_finder(Node):
         
         ranges = np.array(msg.ranges)
         ranges = np.nan_to_num(ranges, nan=msg.range_max, posinf=msg.range_max)
+        
+        # front_idx = int((0.0 - msg.angle_min) / msg.angle_increment)
+        front_distance = ranges[360]
+        
+        brake_msg = Bool()
+        brake_msg.data = bool(front_distance < self.front_wall_distance)
+
+        self.brake_pub.publish(brake_msg)
+
         
         angulo = self.angle_th
         r_B, r_A = getRange(ranges, angulo, msg.angle_min, msg.angle_increment)

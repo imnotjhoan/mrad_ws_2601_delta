@@ -15,7 +15,7 @@ class ControlNode(Node):
         self.declare_parameter('kd', 0.9)                    # Derivative gain for PD controller
         self.declare_parameter('max_steering', 4.0)          # Max steering angle saturation (radians)
         self.declare_parameter('min_steering', -4.0)         # Min steering angle saturation (radians)
-        self.declare_parameter('forward_velocity', 1.0)      # Constant forward velocity (m/s)
+        self.declare_parameter('forward_velocity', 2.0)      # Constant forward velocity (m/s)
         self.declare_parameter('brake_turn_angle', 1.0)
         self.declare_parameter('kp_vel',0.1)
 
@@ -32,6 +32,7 @@ class ControlNode(Node):
         self.prev_time = None
         # Brake state
         self.brake_active = False
+        self.low_error_accum_time = 0.0
 
         # Subscription to brake state
         self.brake_sub = self.create_subscription(
@@ -44,7 +45,7 @@ class ControlNode(Node):
         # Subscription to error topic
         self.error_sub = self.create_subscription(
             Twist,
-            '/error',
+            '/error_wall',
             self.error_callback,
             10
         )
@@ -52,11 +53,12 @@ class ControlNode(Node):
         # Publisher for control commands
         self.cmd_pub = self.create_publisher(
             TwistStamped,
-            '/cmd_vel_nav',
+            '/cmd_vel_ctrl',
             10
         )
 
         self.get_logger().info('PD Control node initialized')
+        
     def brake_callback(self, msg: Bool):
         self.brake_active = msg.data
 
@@ -120,9 +122,24 @@ class ControlNode(Node):
             cmd.twist.angular.z = self.brake_turn_angle  # Turn in place to the left when braking
         else:
             # cmd.twist.linear.x = self.forward_vel
-            min_v = 0.5 
-            calculated_v = self.forward_vel * math.exp(-self.kp_vel * abs(error))
-            cmd.twist.linear.x = max(min_v, calculated_v)
+            
+            # --- Low error detection ---
+            if abs(error) < 0.5:
+                self.low_error_accum_time += dt
+            else:
+                self.low_error_accum_time = 0.0
+
+            # --- Base velocity (error-based damping) ---
+            base_vel = self.forward_vel * math.exp(-self.kp * abs(error))
+
+            # --- Boost if error is stable ---
+            if self.low_error_accum_time >= 0.5:
+                base_vel *= 2.0
+
+            # --- Saturation ---
+            cmd.twist.linear.x = max(base_vel, self.forward_vel)
+
+            
             cmd.twist.angular.z = steering_angle
         
 
