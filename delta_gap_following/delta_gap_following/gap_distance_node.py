@@ -52,7 +52,7 @@ class GapDistanceNode(Node):
             self._publish_target_angle(0.0)
             return
         
-        processed_ranges = ranges.copy()
+        processed_ranges = valid_ranges.copy()
                 
         # Encontrar el obstáculo más cercano válido
         closest_idx = None
