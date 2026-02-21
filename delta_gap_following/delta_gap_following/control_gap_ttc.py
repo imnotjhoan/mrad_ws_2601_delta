@@ -11,15 +11,15 @@ class ControlNode(Node):
         super().__init__('control_gap_ttc')
 
         # -- PARAMETERS --
-        self.declare_parameter('kp', 0.8)                    # Proportional gain for PD controller
-        self.declare_parameter('forward_velocity', 1.5)      # Constant forward velocity (m/s)
-        self.declare_parameter('brake_turn_angle', 0.8) #Puede ser 1.0 si fv = 2.0
+        self.declare_parameter('kp', 1.0)                    # Proportional gain for PD controller
+        self.declare_parameter('forward_vel', 1.4)      # Constant forward velocity (m/s)
+        self.declare_parameter('brake_turn_angle', 0.9) #Puede ser 1.0 si fv = 2.0
         self.declare_parameter('start_flag', False)               #Flag to signal that the car has received its first forward input from Joystickz
         self.declare_parameter('pub_logger', True)      #Flag to pub logger info
 
         # Get parameters
         self.kp = self.get_parameter('kp').value
-        self.forward_vel = self.get_parameter('forward_velocity').value
+        self.forward_vel = self.get_parameter('forward_vel').value
         self.brake_turn_angle= float(self.get_parameter('brake_turn_angle').value)
         self.start_flag = bool(self.get_parameter('start_flag').value)
         self.pub_logger = bool(self.get_parameter('pub_logger').value)
