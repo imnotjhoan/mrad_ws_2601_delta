@@ -19,7 +19,6 @@ class StartController(Node):
         
         self.start_flag = bool(self.get_parameter('start_flag').value)
         self.use_joystick_start = bool(self.get_parameter('use_joystick_start').value)
-              
         
         # ---- Pub/Sub ----
         # QoS profile compatible with sensor publishers (RELIABLE, VOLATILE)

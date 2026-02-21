@@ -72,10 +72,12 @@ class MetricsLogger(Node):
         if msg.data and not self.start_flag:
             self.start_flag = True
             self.get_logger().info("Señal /start recibida → comenzando medición.")
+            
     def brake_cb(self, msg: Bool):
         if msg.data and not self.brake_active:
             self.brake_event = True    # flanco de subida detectado
         self.brake_active = msg.data
+        
     def ref_cb(self, msg: TwistStamped):
         self.v_ref = msg.twist.linear.x       # ← TwistStamped necesita .twist.
         self.w_ref = msg.twist.angular.z

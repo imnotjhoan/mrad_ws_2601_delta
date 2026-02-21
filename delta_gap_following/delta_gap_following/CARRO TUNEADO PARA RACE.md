@@ -29,7 +29,7 @@ ros2 run delta_nav ttc_break_node --ros-args \
   ros2 run delta_nav start_controller_node 
 
   
-# CARRO TUNEADO PARA RACE TRACK CON OBSTACULOS 1 vuelta
+# CARRO TUNEADO PARA RACE TRACK CON OBSTACULOS 
 
 ros2 run delta_gap_following gap_distance_node --ros-args   -p circle_radius:=0.1   -p max_linear_vel:=1.6   -p brake_turn_angle:=1.5   -p min_distance:=0.3   -p max_distance:=12.0   -p robot_radius:=0.1   -p width_weight:=1.5   -p depth_weight:=1.0
 

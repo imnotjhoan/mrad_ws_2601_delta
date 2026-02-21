@@ -13,10 +13,10 @@ class GapDistanceNode(Node):
         # Parámetros configurables
         self.declare_parameter('min_distance', 0.3)  # Distancia mínima 
         self.declare_parameter('max_distance', 12.0)  # Distancia máxima
-        self.declare_parameter('circle_radius', 0.2)  # Radio de "burbuja" alrededor de obstáculos cercanos
+        self.declare_parameter('circle_radius', 0.1)  # Radio de "burbuja" alrededor de obstáculos cercanos
         self.declare_parameter('robot_radius', 0.1)   # Radio del robot
-        self.declare_parameter('width_weight', 1.0)   # Peso para el ancho del gap en el score
-        self.declare_parameter('depth_weight', 1.5)   # Peso para la profundidad del gap en el score
+        self.declare_parameter('width_weight', 1.5)   # Peso para el ancho del gap en el score
+        self.declare_parameter('depth_weight', 1.0)   # Peso para la profundidad del gap en el score
         
         self.min_distance = self.get_parameter('min_distance').value
         self.max_distance = self.get_parameter('max_distance').value
