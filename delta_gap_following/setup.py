@@ -32,6 +32,7 @@ setup(
             'gap_distance_node=delta_gap_following.gap_distance_node:main',
             'control_gap_ttc = delta_gap_following.control_gap_ttc:main',
             'ttc_gap_logger_node = delta_gap_following.ttc_gap_logger_node:main',
+            'metrics_node = delta_gap_following.metrics_node:main'
         ],
     },
 )
