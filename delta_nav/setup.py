@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
         'ttc_break_node = delta_nav.ttc_break_node:main',
         'start_controller_node = delta_nav.start_controller_node:main',
+        'twist_to_twiststamp = delta_nav.twist_to_twiststamp:main',
         ],
     },
 )

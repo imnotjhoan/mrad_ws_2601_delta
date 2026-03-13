@@ -6,8 +6,14 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, Exec
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch.conditions import IfCondition, UnlessCondition
 
 import xacro
+
+ack = False
+maze = ["empty_world.sdf", "j_maze.sdf", "melgui_maze.sdf", "DemoRaceTrack.sdf", "RaceTrack.sdf", "RaceTrackObs.sdf" , "walls_world2.sdf"]
+xacro_model = "ackerman_robot.urdf.xacro" if ack else "robot.urdf.xacro"
+gz_world = maze[-1] # Change the index to select a different world
 
 def generate_launch_description():
     gazebo_pkg_name = "delta_gazebo"
@@ -18,7 +24,7 @@ def generate_launch_description():
     world = LaunchConfiguration("world")
 
     # --- Robot description (xacro -> URDF XML string) ---
-    xacro_file = os.path.join(get_package_share_directory(description_pkg_name), "diffdrive_urdf", "robot.urdf.xacro")
+    xacro_file = os.path.join(get_package_share_directory(description_pkg_name), "diffdrive_urdf", xacro_model)
     robot_description = xacro.process_file(xacro_file).toxml()
 
     rsp = Node(
@@ -39,6 +45,21 @@ def generate_launch_description():
             )
         ),
         launch_arguments={"gz_args": ['-r -v4 ', world], 'on_exit_shutdown': 'true'}.items(),
+        condition=IfCondition(LaunchConfiguration('gz_mode')),
+        
+    )
+
+    # --- Launch Gazebo Headless (via ros_gz_sim launch file) ---
+    gz_headless_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("ros_gz_sim"),
+                "launch",
+                "gz_sim.launch.py",
+            )
+        ),
+        launch_arguments={"gz_args": ['-r -s -v4 ', world], 'headless-rendering': 'true', 'on_exit_shutdown': 'true'}.items(),
+        condition=UnlessCondition(LaunchConfiguration('gz_mode')),
     )
 
     # --- Spawn entity into Gazebo from robot_description topic ---
@@ -49,18 +70,13 @@ def generate_launch_description():
         arguments=[
             "-name", "diffbot",
             "-topic", "robot_description",
-            "-x", "-18.0",
-            "-y", "4.0",
-            "-z", "1.0",
-            "-R", "0.0",      # roll
-            "-P", "0.0",      # pitch
-            "-Y", "1.5708",   # yaw (90°)
+            "-x", "0.0", "-y", "0.0", "-z", "1.0", "-R", "0.0", "-P", "0.0", "-Y", "0.0"
+            # "-x", "-18.44", "-y", "4.29", "-z", "3.0", "-R", "0.0", "-P", "0.0", "-Y", "1.57"
         ],
     )
 
+    #--- Share topics between ROS2 and Gazebo ---
     bridge_params = os.path.join(get_package_share_directory(gazebo_pkg_name),'config','topic_bridge.yaml')
-
-
     bridge = Node(
     package="ros_gz_bridge",
     executable="parameter_bridge",
@@ -72,6 +88,7 @@ def generate_launch_description():
         ],
     )
 
+    # -- Controllers ---
     diff_drive_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -83,6 +100,8 @@ def generate_launch_description():
         executable="spawner",
         arguments=["joint_broadcaster_controller"],
     )
+
+    # -- Use Joystick Controller --
     joy_params = os.path.join(get_package_share_directory(bringup_pkg_name),'config','joystick.yaml')
 
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
@@ -105,8 +124,8 @@ def generate_launch_description():
                     parameters=[twist_mux_params,{'use_sim_time': True}],
                     remappings=[('/cmd_vel_out','/diffdrive_controller/cmd_vel')]
     )
-    
-    
+
+   
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -116,10 +135,16 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             "world",
-            default_value=os.path.join(get_package_share_directory(gazebo_pkg_name), "worlds", "RaceTrackObs.sdf"),
+            default_value=os.path.join(get_package_share_directory(gazebo_pkg_name), "worlds", gz_world),
             description="Full path to world SDF file",
         ),
+        DeclareLaunchArgument(
+        'gz_mode',
+        default_value='True',
+        description='Set to True to launch the specific node'
+        ),
         gz_launch,
+        gz_headless_launch,
         rsp,
         spawn,
         bridge,
@@ -128,5 +153,4 @@ def generate_launch_description():
         joy_node,
         teleop_node,
         twist_mux_node,
-        
     ])

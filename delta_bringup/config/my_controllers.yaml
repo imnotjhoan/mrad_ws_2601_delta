@@ -1,7 +1,7 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100
-    # use_sim_time: true
+    update_rate: 30
+    use_sim_time: true
 
     diffdrive_controller:
       type: diff_drive_controller/DiffDriveController
@@ -13,6 +13,7 @@ diffdrive_controller:
   ros__parameters:
 
     publish_rate: 50.0
+    enable_odom_tf: false
 
     base_frame_id: base_link
 
@@ -20,18 +21,3 @@ diffdrive_controller:
     right_wheel_names: ['right_wheel_joint']
     wheel_separation: 0.44 # distance between wheels ${ly/2+le_w/2}*2
     wheel_radius: 0.05
-
-    linear:
-      x:
-        has_velocity_limits: true
-        max_velocity: 2.0       # m/s
-        has_acceleration_limits: true
-        max_acceleration: 1.0    # m/s^2 
-        
-    # Evita giros bruscos que marean la odometría
-    angular:
-      z:
-        has_velocity_limits: true
-        max_velocity: 2.0    # rad/s
-        has_acceleration_limits: true
-        max_acceleration: 2.0    # rad/s^2

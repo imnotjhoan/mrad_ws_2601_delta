@@ -59,21 +59,18 @@
         </visual>
         <collision>
             <geometry>
-                <sphere radius="${rad_w}" />
+                  <sphere radius="${rad_w}" />
             </geometry>
-        <surface>
-            <friction>
-                <ode>
-                <mu1>2</mu1>
-                <mu2>4</mu2>
-                <kp>1000000.0</kp> 
-                <kd>10.0</kd>
-                </ode>
-            </friction>
-        </surface>
-
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>1.0</mu>
+                        <mu2>2.0</mu2>
+                    </ode>
+                </friction>
+            </surface>
         </collision>
-        <xacro:inertial_cylinder mass="0.5" length="${le_w}" radius="${rad_w}">
+        <xacro:inertial_cylinder mass="0.1" length="${le_w}" radius="${rad_w}">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
@@ -97,20 +94,18 @@
         </visual>
         <collision>
             <geometry>
-                <sphere radius="${rad_w}" />
+                  <sphere radius="${rad_w}" />
             </geometry>
             <surface>
                 <friction>
-                <ode>
-                <mu1>2</mu1>
-                <mu2>4</mu2>
-                <kp>1000000.0</kp> 
-                <kd>10.0</kd>
-                </ode>
+                    <ode>
+                        <mu>1.0</mu>
+                        <mu2>2.0</mu2>
+                    </ode>
                 </friction>
             </surface>
         </collision>
-        <xacro:inertial_cylinder mass="0.5" length="${le_w}" radius="${rad_w}">
+        <xacro:inertial_cylinder mass="0.1" length="${le_w}" radius="${rad_w}">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>

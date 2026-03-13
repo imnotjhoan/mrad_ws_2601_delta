@@ -1,4 +1,5 @@
 <sdf version='1.10'>
+
   <world name='empty_world'>
     <physics name='1ms' type='ignored'>
       <max_step_size>0.001</max_step_size>
@@ -154,8 +155,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -201,8 +202,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -250,8 +251,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -299,8 +300,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -348,8 +349,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -397,8 +398,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -444,8 +445,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -491,8 +492,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -538,8 +539,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -587,8 +588,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -636,8 +637,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -683,8 +684,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -694,7 +695,7 @@
       <static>true</static>
       <self_collide>false</self_collide>
     </model>
-    <model name='cylinder_5'>
+    <!-- <model name='cylinder_5'>
       <pose>15.380153199924225 -5.3890318190842672 0.49999942638036005 -3.633291706898937e-19 -2.0285031877248724e-19 -2.0541057038325307e-20</pose>
       <link name='cylinder_link'>
         <inertial>
@@ -732,8 +733,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -742,7 +743,7 @@
       </link>
       <static>true</static>
       <self_collide>false</self_collide>
-    </model>
+    </model> -->
     <model name='box_5'>
       <pose>15.415860327515036 -7.8650439754918162 0.49999999235666714 -2.0235348558019218e-08 -5.4095292036978226e-10 2.754969671188418e-07</pose>
       <link name='box_link'>
@@ -779,8 +780,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -828,8 +829,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -877,8 +878,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -888,7 +889,7 @@
       <static>true</static>
       <self_collide>false</self_collide>
     </model>
-    <!-- <model name='cylinder_8'>
+    <model name='cylinder_8'>
       <pose>9.5348630115903514 -6.5528362012915853 0.49999942638036005 4.4311015558892038e-19 2.6294776182427126e-19 -1.5024773136058346e-20</pose>
       <link name='cylinder_link'>
         <inertial>
@@ -926,8 +927,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -936,7 +937,7 @@
       </link>
       <static>true</static>
       <self_collide>false</self_collide>
-    </model> -->
+    </model>
     <model name='cylinder_9'>
       <pose>4.8736925991263735 -7.7265303594347534 0.49999942638036005 -1.4169845423142048e-19 -1.8146596453449824e-20 3.0926300231275656e-20</pose>
       <link name='cylinder_link'>
@@ -975,8 +976,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1024,8 +1025,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1073,8 +1074,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1122,8 +1123,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1171,8 +1172,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1220,8 +1221,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1269,8 +1270,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1280,7 +1281,7 @@
       <static>true</static>
       <self_collide>false</self_collide>
     </model>
-    <model name='cylinder_16'>
+  <!--   <model name='cylinder_16'>
       <pose>4.8186982923226616 -8.7250170280479704 0.49999943337020003 1.1675612602436138e-08 1.249305924377407e-11 -0.067743203688675507</pose>
       <link name='cylinder_link'>
         <inertial>
@@ -1318,8 +1319,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1328,7 +1329,7 @@
       </link>
       <static>true</static>
       <self_collide>false</self_collide>
-    </model>
+    </model> -->
     <model name='cylinder_17'>
       <pose>-18.8651900916297 -1.0129338073289493 0.499999338297614 1.8501074420481711e-07 6.2627394996269322e-08 5.2658737226551144e-05</pose>
       <link name='cylinder_link'>
@@ -1367,8 +1368,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1416,8 +1417,8 @@
             </cylinder>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1463,8 +1464,8 @@
             </box>
           </geometry>
           <material>
-            <ambient>0.300000012 0.300000012 0.300000012 1</ambient>
-            <diffuse>0.699999988 0.699999988 0.699999988 1</diffuse>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
             <specular>1 1 1 1</specular>
           </material>
         </visual>
@@ -1493,5 +1494,6 @@
         <falloff>0</falloff>
       </spot>
     </light>
+
   </world>
 </sdf>

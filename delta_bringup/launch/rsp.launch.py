@@ -14,15 +14,13 @@ def generate_launch_description():
     bringup_pkg_name = "delta_bringup"
     description_pkg_name = "delta_description"
 
+
+
     use_sim_time = LaunchConfiguration("use_sim_time")
     world = LaunchConfiguration("world")
 
     # --- Robot description (xacro -> URDF XML string) ---
-    xacro_file = os.path.join(
-        get_package_share_directory('delta_description'),
-        'diffdrive_urdf',
-        'robot.urdf.xacro'
-    )
+    xacro_file = os.path.join(get_package_share_directory(description_pkg_name), "diffdrive_urdf", "robot.urdf.xacro")
     robot_description = xacro.process_file(xacro_file).toxml()
 
     rsp = Node(
@@ -50,9 +48,3 @@ def generate_launch_description():
         ),
         rsp,
     ])
-
-
-
-
-
-

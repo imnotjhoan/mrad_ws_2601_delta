@@ -34,7 +34,7 @@
         <visualize>false</visualize>
         <topic>scan</topic>
         <gz_frame_id>lidar_link</gz_frame_id>
-
+        <pose relative_to='lidar_link'>0 0 0 0 0 0</pose>
         <lidar>
         <scan>
             <horizontal>
